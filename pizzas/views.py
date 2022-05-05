@@ -3,6 +3,9 @@ from django.shortcuts import render, redirect
 from .forms import CommentForm
 from .models import Pizza
 
+#from django.http import HttpResponse
+#from django.template import loader
+
 # Create your views here.
 
 def index(request):
@@ -20,8 +23,9 @@ def pizzas(request):
 def pizza(request, pizza_id):
     pizza = Pizza.objects.get(id=pizza_id)
     toppings = pizza.topping_set.all()
+    comments = pizza.comment_set.order_by('-date_added')
 
-    context = {'pizza':pizza,'toppings':toppings}
+    context = {'pizza':pizza,'toppings':toppings, 'comments':comments}
 
     return render(request, 'pizzas/pizza.html', context)
 
@@ -42,4 +46,3 @@ def new_comment(request, pizza_id):
 
     context = {'form':form, 'pizza':pizza}
     return render(request, 'pizzas/new_comment.html', context)
-

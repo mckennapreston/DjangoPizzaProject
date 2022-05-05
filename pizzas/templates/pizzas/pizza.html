@@ -19,7 +19,9 @@
     {% empty %}
     <p>There are no toppings for this pizza yet.</p>
     {% endfor %}
-    <p>{% load static %} <img src="{% static "dj_app/hawaiianpizza.jpg" %}" alt="hawaiian" /></p>
+    
+    <p>{% load static %} 
+        <img src="{% static "pizzas/media/hawaiianpizza.jpg" %}" alt="hawaiian" /></p>
 <ul>
 
 <a href="{% url 'pizzas:new_comment' pizza.id %}">Add new comment</a>
